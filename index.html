@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSEP Poster Draft Workspace & Canva Copy Center</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Dashboard Top Header Bar -->
+  <header class="app-header">
+    <div class="brand-section">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 17L12 22L22 17" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 12L12 17L22 12" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>GSEP Promotion Hub</h1>
+      <span>A0 Poster Draft Workspace</span>
+    </div>
+
+    <div class="global-controls">
+      <!-- Theme Switcher -->
+      <div class="theme-selector">
+        <button class="theme-btn active" onclick="setTheme('cyber')">Cyber Tokyo</button>
+        <button class="theme-btn" onclick="setTheme('sakura')">Sakura Tech</button>
+        <button class="theme-btn" onclick="setTheme('classic')">Classic Gold</button>
+      </div>
+
+      <!-- Zoom Controls -->
+      <div class="zoom-controls">
+        <span>Zoom:</span>
+        <input type="range" class="zoom-slider" id="zoomSlider" min="0.3" max="1.5" step="0.05" value="0.75" oninput="adjustZoom(this.value)">
+        <span id="zoomPercent">75%</span>
+      </div>
+
+      <!-- Export Actions -->
+      <div style="display: flex; gap: 8px;">
+        <button onclick="exportPNG()" style="background-color: #059669; color: white; border: none; padding: 6px 12px; font-size: 0.85rem; font-weight: 600; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background-color 0.2s;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export PNG
+        </button>
+        <button onclick="exportPDF()" style="background-color: #2563eb; color: white; border: none; padding: 6px 12px; font-size: 0.85rem; font-weight: 600; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background-color 0.2s;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Print/PDF
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Application Body Workspace -->
+  <div class="app-container">
+    
+    <!-- LEFT PANEL: The A0 Poster Previewer Pane -->
+    <div class="preview-pane">
+      <div class="poster-viewport" id="posterViewport">
+        
+        <!-- The Poster Draft (Aspect Ratio: 1:1.414, Dimensions: 841px x 1189px) -->
+        <div class="poster-draft" id="posterDraft">
+          <!-- Ambient glowing decoration background blobs -->
+          <div class="decor-circle decor-circle-1"></div>
+          <div class="decor-circle decor-circle-2"></div>
+
+          <!-- POSTER HEADER -->
+          <div class="poster-header">
+            <div class="poster-logo-container">
+              <!-- Fallback to placeholder if image load fails, but we have renamed our image logo_sciencetokyo.png -->
+              <img src="assets/logo_sciencetokyo.png" class="poster-logo" alt="Science Tokyo Logo" onerror="this.style.display='none'">
+            </div>
+            <div class="poster-header-text">
+              <div class="university-name">Institute of Science Tokyo</div>
+              <div class="program-name">GSEP</div>
+            </div>
+          </div>
+
+          <!-- POSTER HERO SECTION -->
+          <div class="poster-hero">
+            <div class="poster-slogan">Global Scientists &<br>Engineers Program</div>
+            <div class="poster-tagline">Engineers of Tomorrow, United in Tokyo &bull; Bachelor of Engineering &bull; April Intake Only</div>
+          </div>
+
+          <!-- THREE PILLARS CARD GRID -->
+          <div class="poster-pillars">
+            <div class="pillar-card">
+              <div class="pillar-icon">🇬🇧</div>
+              <div class="pillar-title">100% in English</div>
+              <div class="pillar-desc">Earn a fully accredited Bachelor of Engineering degree entirely in English. No Japanese proficiency required for admission.</div>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-icon">🔄</div>
+              <div class="pillar-title">Transdisciplinary</div>
+              <div class="pillar-desc">Belong to the Department of TSE. Study a unified curriculum combining Science, Engineering, and Project Management.</div>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-icon">🛠️</div>
+              <div class="pillar-title">Hands-on PBL</div>
+              <div class="pillar-desc">Core courses are taught via hands-on formats and Project-Based Learning (PBL) from your very first year.</div>
+            </div>
+          </div>
+
+          <!-- MAIN GRID (LEFT SIDE DETAILS & RIGHT SIDE DETAILS) -->
+          <div class="poster-middle-grid">
+            
+            <!-- Mid-Left: GSEP Facts & Nationalities, Post-Grad Paths, Alumni Voices -->
+            <div class="poster-left-panel">
+              
+              <!-- Global Community Card -->
+              <div class="poster-section" style="flex: 1.1;">
+                <div class="poster-section-title">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
+                  GSEP Global Profile
+                </div>
+                <div class="stat-box">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 11px; font-weight: 700; color: var(--poster-text-muted);">Accepted Students (since 2016):</span>
+                    <span class="stat-highlight-large">151</span>
+                  </div>
+                  <div class="stat-bar-container">
+                    <div class="stat-group-title">Gender Balance</div>
+                    <div class="gender-bar-wrapper">
+                      <div class="gender-male" style="width: 70%">MALE 70%</div>
+                      <div class="gender-female" style="width: 30%">FEMALE 30%</div>
+                    </div>
+                  </div>
+                  <div class="stat-bar-container">
+                    <div class="stat-group-title">Top Student Origins</div>
+                    <div class="stat-badge-grid">
+                      <span class="stat-badge">Thailand 37%</span>
+                      <span class="stat-badge">Indonesia 13%</span>
+                      <span class="stat-badge">Mongolia 11%</span>
+                      <span class="stat-badge">Vietnam 10%</span>
+                      <span class="stat-badge">India 5%</span>
+                      <span class="stat-badge">Korea 4%</span>
+                      <span class="stat-badge">Others 20%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Career/Graduation Paths Card -->
+              <div class="poster-section" style="flex: 1.1;">
+                <div class="poster-section-title">
+                  <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.89 12.55L12 15.89l6.11-3.34c-.31-.41-.75-.75-1.28-.96L12 13.56l-4.83-2c-.53.21-.97.55-1.28.96z"/></svg>
+                  Post-Graduation Career Paths
+                </div>
+                <div style="font-size: 10px; font-weight: 700; color: var(--poster-accent); margin-bottom: 8px;">
+                  65.5% Continue to Graduate School
+                </div>
+                <div class="stat-box">
+                  <div class="stat-bar-container">
+                    <div class="stat-bar-label">
+                      <span>Graduate School (Science Tokyo)</span>
+                      <span>51.7%</span>
+                    </div>
+                    <div class="stat-bar-bg">
+                      <div class="stat-bar-fill" style="width: 51.7%"></div>
+                    </div>
+                  </div>
+                  <div class="stat-bar-container">
+                    <div class="stat-bar-label">
+                      <span>Graduate School (Other Universities)</span>
+                      <span>13.8%</span>
+                    </div>
+                    <div class="stat-bar-bg">
+                      <div class="stat-bar-fill" style="width: 13.8%"></div>
+                    </div>
+                  </div>
+                  <div class="stat-bar-container">
+                    <div class="stat-bar-label">
+                      <span>Employed / Joined Global Industry</span>
+                      <span>34.5%</span>
+                    </div>
+                    <div class="stat-bar-bg">
+                      <div class="stat-bar-fill" style="width: 34.5%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Alumni Voices (Testimonials) -->
+              <div class="poster-section" style="flex: 0.9;">
+                <div class="poster-section-title" style="margin-bottom: 6px;">
+                  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                  Alumni Voices
+                </div>
+                <div class="quote-bubble">
+                  <div class="quote-text">"Someone curious and open-minded fits GSEP perfectly."</div>
+                  <div class="quote-author">— Alumnus from Mongolia</div>
+                </div>
+                <div class="quote-bubble" style="margin-top: 4px;">
+                  <div class="quote-text">"If you want to explore new opportunities, GSEP is the right step."</div>
+                  <div class="quote-author">— Alumnus from Thailand</div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Mid-Right: Scholarships, Research Interests, Support Services -->
+            <div class="poster-right-panel">
+              
+              <!-- Scholarship details -->
+              <div class="poster-section" style="flex: 1;">
+                <div class="poster-section-title">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                  Scholarships & Funding
+                </div>
+                <div class="scholarship-row">
+                  <div class="scholarship-card">
+                    <div class="scholarship-card-title">MEXT Scholarship (Top Applicants)</div>
+                    <div class="scholarship-highlight">Full Tuition Waiver + ¥117,000/mo</div>
+                    <div class="scholarship-details">Full exemption from application, admission, and tuition fees for the entire 4-year duration. Includes a monthly stipend of JPY 117,000.</div>
+                  </div>
+                  <div class="scholarship-card">
+                    <div class="scholarship-card-title">JASSO Scholarship & Other Support</div>
+                    <div class="scholarship-highlight">Monthly Stipend of ¥48,000</div>
+                    <div class="scholarship-details">Available for outstanding international students. Additional support options include private foundation scholarships and tuition waivers.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Lab Research Fields & Curriculum -->
+              <div class="poster-section" style="flex: 1.2;">
+                <div class="poster-section-title">
+                  <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                  Research Interests (4th Year Projects)
+                </div>
+                <div class="stat-box" style="margin-bottom: 8px;">
+                  <div class="stat-bar-container">
+                    <div class="stat-bar-label">
+                      <span>Civil Engineering</span>
+                      <span>24%</span>
+                    </div>
+                    <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 24%"></div></div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <div class="stat-bar-container">
+                      <div class="stat-bar-label"><span>Social Sciences</span><span>16%</span></div>
+                      <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 16%"></div></div>
+                    </div>
+                    <div class="stat-bar-container">
+                      <div class="stat-bar-label"><span>Energy & Env.</span><span>16%</span></div>
+                      <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 16%"></div></div>
+                    </div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <div class="stat-bar-container">
+                      <div class="stat-bar-label"><span>Electronic & Comm.</span><span>15%</span></div>
+                      <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 15%"></div></div>
+                    </div>
+                    <div class="stat-bar-container">
+                      <div class="stat-bar-label"><span>Nuclear Engineering</span><span>14%</span></div>
+                      <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 14%"></div></div>
+                    </div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <div class="stat-bar-container">
+                      <div class="stat-bar-label"><span>Mechanical Eng.</span><span>13%</span></div>
+                      <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 13%"></div></div>
+                    </div>
+                    <div class="stat-bar-container">
+                      <div class="stat-bar-label"><span>Life Sciences</span><span>2%</span></div>
+                      <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 2%"></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 6px; align-items: center; background: rgba(0,0,0,0.15); padding: 5px; border-radius: 6px; border: 1px solid var(--poster-card-border);">
+                  <div style="font-size: 14px; flex-shrink: 0; background: var(--poster-badge-bg); border-radius: 4px; padding: 2px 5px; display:flex; align-items:center; justify-content:center;">🔬</div>
+                  <div style="font-size: 9.5px; line-height: 1.3; color: var(--poster-text-muted);">
+                    <strong style="color: var(--poster-text);">Independent Research Project:</strong> Consolidate and reinforce your transdisciplinary skills in a supervised laboratory thesis.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Student Life & Support Section -->
+              <div class="poster-section" style="flex: 0.9;">
+                <div class="poster-section-title">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                  Dorm & Student Support
+                </div>
+                <div class="support-grid">
+                  <div class="support-subcard">
+                    <div class="support-subcard-title">Umegaoka Dorm</div>
+                    <div class="support-subcard-text">Guaranteed, inexpensive student housing for 1st year GSEP students (private rooms).</div>
+                  </div>
+                  <div class="support-subcard">
+                    <div class="support-subcard-title">Nihongo Space</div>
+                    <div class="support-subcard-text">Weekly support space with language partners, calligraphies, and cultural tutorials.</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- ADMISSION TIMELINE (REUSABLE, GENERIC MILESTONES) -->
+          <div class="poster-section" style="padding: 8px 15px 8px 15px; margin-bottom: 15px; flex: 0 0 auto;">
+            <div class="poster-section-title" style="margin-bottom: 6px; padding-bottom: 4px;">
+              <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+              Admissions Roadmap & Milestones (April Intake)
+            </div>
+            <div class="timeline">
+              <div class="timeline-step">
+                <div class="timeline-node">1</div>
+                <div class="timeline-label">Application</div>
+                <div class="timeline-date">Mid-August</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-node">2</div>
+                <div class="timeline-label">1st Screening</div>
+                <div class="timeline-date">September</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-node">3</div>
+                <div class="timeline-label">2nd Screening</div>
+                <div class="timeline-date">October</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-node">4</div>
+                <div class="timeline-label">Results</div>
+                <div class="timeline-date">November</div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-node">5</div>
+                <div class="timeline-label">April Intake</div>
+                <div class="timeline-date">Semester Starts</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- POSTER FOOTER Section -->
+          <div class="poster-footer">
+            <div class="footer-left">
+              <div class="footer-tagline-bottom">Institute of Science Tokyo</div>
+              <div class="footer-mission">
+                "Advancing science and human wellbeing to create value for and with society."
+              </div>
+              <div class="footer-links" style="margin-top: 10px;">
+                <span>Web:</span> tse.ens.titech.ac.jp/~gsep &bull; <span>Facebook:</span> gsepsciencetokyo
+              </div>
+            </div>
+            <div class="footer-right">
+              <div class="qr-box">
+                <div class="qr-image-wrapper">
+                  <img src="assets/qr_website.png" class="qr-image" alt="Website QR" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://www.tse.ens.titech.ac.jp/~gsep/'">
+                </div>
+                <div class="qr-label">GSEP Website</div>
+              </div>
+              <div class="qr-box">
+                <div class="qr-image-wrapper">
+                  <img src="assets/qr_admissions.png" class="qr-image" alt="Admissions QR" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.titech.ac.jp/english/admissions/prospective-students/application-guides#gsep'">
+                </div>
+                <div class="qr-label">Admissions Guide</div>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- End of Poster Draft -->
+        
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: Canva Copy Center Helper Sidebar -->
+    <aside class="helper-sidebar">
+      
+      <!-- Tabs header row -->
+      <nav class="sidebar-tabs">
+        <button class="tab-btn active" id="tabBtnCopy" onclick="switchTab('copy')">Copy Center</button>
+        <button class="tab-btn" id="tabBtnAssets" onclick="switchTab('assets')">Asset Hub</button>
+        <button class="tab-btn" id="tabBtnSpecs" onclick="switchTab('specs')">Canva Specs</button>
+      </nav>
+
+      <div class="tab-content-container">
+        
+        <!-- TAB 1: COPY CENTER (Text contents categorized) -->
+        <section class="tab-pane active" id="paneCopy">
+          <h2 class="panel-section-title">Canva Copy Center</h2>
+          <p class="panel-intro">Double-click text blocks in the poster to edit them directly. Use this panel to copy structured content to paste directly into Canva.</p>
+
+          <div class="copy-card">
+            <div class="copy-card-header">
+              <span class="copy-label">Main Program Title</span>
+              <span class="canva-font-suggestion">H1 Title (Bold 72pt)</span>
+            </div>
+            <div class="copy-card-body" id="copyTextSlogan">Global Scientists & Engineers Program</div>
+            <button class="copy-btn" onclick="copyToClipboard('copyTextSlogan', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Program Title
+            </button>
+          </div>
+
+          <div class="copy-card">
+            <div class="copy-card-header">
+              <span class="copy-label">Hero Slogan Tagline</span>
+              <span class="canva-font-suggestion">Subtitle (28pt)</span>
+            </div>
+            <div class="copy-card-body" id="copyTextTagline">Engineers of Tomorrow, United in Tokyo &bull; Bachelor of Engineering &bull; April Intake Only</div>
+            <button class="copy-btn" onclick="copyToClipboard('copyTextTagline', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Slogan Tagline
+            </button>
+          </div>
+
+          <div class="copy-card">
+            <div class="copy-card-header">
+              <span class="copy-label">Pillar 1: 100% English</span>
+              <span class="canva-font-suggestion">Body Text (18pt)</span>
+            </div>
+            <div class="copy-card-body" id="copyTextPillar1">Earn a fully accredited Bachelor of Engineering degree entirely in English. No Japanese proficiency required for admission.</div>
+            <button class="copy-btn" onclick="copyToClipboard('copyTextPillar1', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Pillar 1
+            </button>
+          </div>
+
+          <div class="copy-card">
+            <div class="copy-card-header">
+              <span class="copy-label">Pillar 2: Transdisciplinary</span>
+              <span class="canva-font-suggestion">Body Text (18pt)</span>
+            </div>
+            <div class="copy-card-body" id="copyTextPillar2">Belong to the Department of TSE. Study a unified curriculum combining Science, Engineering, and Project Management.</div>
+            <button class="copy-btn" onclick="copyToClipboard('copyTextPillar2', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Pillar 2
+            </button>
+          </div>
+
+          <div class="copy-card">
+            <div class="copy-card-header">
+              <span class="copy-label">Pillar 3: PBL</span>
+              <span class="canva-font-suggestion">Body Text (18pt)</span>
+            </div>
+            <div class="copy-card-body" id="copyTextPillar3">Core courses are taught via hands-on formats and Project-Based Learning (PBL) from your very first year.</div>
+            <button class="copy-btn" onclick="copyToClipboard('copyTextPillar3', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Pillar 3
+            </button>
+          </div>
+
+          <div class="copy-card">
+            <div class="copy-card-header">
+              <span class="copy-label">Scholarships Info</span>
+              <span class="canva-font-suggestion">Section Card Body (22pt)</span>
+            </div>
+            <div class="copy-card-body" id="copyTextScholarships">MEXT Scholarship: Full tuition, admission, and application fee waivers + monthly JPY 117,000 stipend for 4 years.
+JASSO Scholarship: Monthly stipend of JPY 48,000 for top international candidates.
+Tuition waivers and other private scholarships are available.</div>
+            <button class="copy-btn" onclick="copyToClipboard('copyTextScholarships', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Scholarship Details
+            </button>
+          </div>
+
+          <div class="copy-card">
+            <div class="copy-card-header">
+              <span class="copy-label">Alumni Quote 1</span>
+              <span class="canva-font-suggestion">Testimonial Bubble (16pt)</span>
+            </div>
+            <div class="copy-card-body" id="copyTextTestimonial1">"GSEP gives an opportunity to get exposed to diverse topics and learn with students from different backgrounds. Someone curious and open-minded fits perfectly."
+— Alumnus from Mongolia</div>
+            <button class="copy-btn" onclick="copyToClipboard('copyTextTestimonial1', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Quote 1
+            </button>
+          </div>
+
+          <div class="copy-card">
+            <div class="copy-card-header">
+              <span class="copy-label">Alumni Quote 2</span>
+              <span class="canva-font-suggestion">Testimonial Bubble (16pt)</span>
+            </div>
+            <div class="copy-card-body" id="copyTextTestimonial2">"If you are keen to learn new things and explore different opportunities, GSEP is the right step to take a chance on all of it."
+— Alumnus from Thailand</div>
+            <button class="copy-btn" onclick="copyToClipboard('copyTextTestimonial2', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Quote 2
+            </button>
+          </div>
+
+          <div class="copy-card">
+            <div class="copy-card-header">
+              <span class="copy-label">Dorm & support services</span>
+              <span class="canva-font-suggestion">Support Panel (16pt)</span>
+            </div>
+            <div class="copy-card-body" id="copyTextSupport">Guaranteed Housing: Reside in private rooms with other GSEP students at Umegaoka Dormitory at inexpensive, reasonable rates.
+Japanese Learning: Access classes and Nihongo Space for conversation exercises, tutorial support, and cultural events.</div>
+            <button class="copy-btn" onclick="copyToClipboard('copyTextSupport', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Dorm & Support
+            </button>
+          </div>
+
+          <div class="copy-card">
+            <div class="copy-card-header">
+              <span class="copy-label">General Admission Milestones</span>
+              <span class="canva-font-suggestion">Roadmap Steps (14pt)</span>
+            </div>
+            <div class="copy-card-body" id="copyTextTimeline">1. Online Application: Mid-August
+2. Document Review: September
+3. Second Screening (Interviews): October
+4. Final Results Announcement: November
+5. Enrollment & Semester Begins: April Intake Only</div>
+            <button class="copy-btn" onclick="copyToClipboard('copyTextTimeline', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Timeline
+            </button>
+          </div>
+
+          <div class="copy-card">
+            <div class="copy-card-header">
+              <span class="copy-label">GSEP Facts & Figures (Statistics)</span>
+              <span class="canva-font-suggestion">Sidebar Copy Card</span>
+            </div>
+            <div class="copy-card-body" id="copyTextStatistics">Accepted Students: 151
+Gender Ratio: 70% Male, 30% Female
+Top Student Nationalities: Thailand (37%), Indonesia (13%), Mongolia (11%), Vietnam (10%), India (5%), Korea (4%), others (20%).
+Post-Graduation Paths:
+- 51.7% Graduate School (Science Tokyo)
+- 13.8% Graduate School (Other Universities)
+- 34.5% Employed / Global Workforce
+Research Interests (4th Year Projects):
+- Civil Engineering: 24%
+- Social Sciences & Mgmt: 16%
+- Energy & Environment: 16%
+- Electronic & Communication: 15%
+- Nuclear Engineering: 14%
+- Mechanical Engineering: 13%
+- Life Sciences: 2%</div>
+            <button class="copy-btn" onclick="copyToClipboard('copyTextStatistics', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Statistics Info
+            </button>
+          </div>
+        </section>
+
+        <!-- TAB 2: ASSETS HUB & PALETTES -->
+        <section class="tab-pane" id="paneAssets">
+          <h2 class="panel-section-title">Theme Color Palettes</h2>
+          <p class="panel-intro">Click any swatch to copy its Hex code directly to Canva's color panel.</p>
+
+          <div class="palette-grid" id="themeColorsContainer">
+            <!-- Dynamically populated by JS based on selected theme -->
+          </div>
+
+          <h2 class="panel-section-title">Extracted PDF Assets</h2>
+          <p class="panel-intro">These high-quality images have been extracted from the GSEP overview PDF. Drag them directly into your Canva file uploads.</p>
+          
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="asset-item">
+              <img src="assets/logo_sciencetokyo.png" class="asset-thumb" alt="Science Tokyo Logo">
+              <div class="asset-details">
+                <div class="asset-name">logo_sciencetokyo.png</div>
+                <div class="asset-meta">Logo • 780x158 • Trans. PNG</div>
+              </div>
+              <a href="assets/logo_sciencetokyo.png" download class="asset-download-btn" title="Download">
+                <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+              </a>
+            </div>
+
+            <div class="asset-item">
+              <img src="assets/photo_graduation.jpg" class="asset-thumb" alt="Graduation Group">
+              <div class="asset-details">
+                <div class="asset-name">photo_graduation.jpg</div>
+                <div class="asset-meta">Photo • 2048x769 • High Res</div>
+              </div>
+              <a href="assets/photo_graduation.jpg" download class="asset-download-btn" title="Download">
+                <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+              </a>
+            </div>
+
+            <div class="asset-item">
+              <img src="assets/photo_gsep_flyer.jpg" class="asset-thumb" alt="GSEP Flyer Cover">
+              <div class="asset-details">
+                <div class="asset-name">photo_gsep_flyer.jpg</div>
+                <div class="asset-meta">Cover Page • 1137x1609 • Portrait</div>
+              </div>
+              <a href="assets/photo_gsep_flyer.jpg" download class="asset-download-btn" title="Download">
+                <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+              </a>
+            </div>
+
+            <div class="asset-item">
+              <img src="assets/photo_curriculum.png" class="asset-thumb" alt="Curriculum Graphic">
+              <div class="asset-details">
+                <div class="asset-name">photo_curriculum.png</div>
+                <div class="asset-meta">Diagram • 1126x1356 • Trans. PNG</div>
+              </div>
+              <a href="assets/photo_curriculum.png" download class="asset-download-btn" title="Download">
+                <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+              </a>
+            </div>
+
+            <div class="asset-item">
+              <img src="assets/photo_lab_activity.jpg" class="asset-thumb" alt="Lab Activity">
+              <div class="asset-details">
+                <div class="asset-name">photo_lab_activity.jpg</div>
+                <div class="asset-meta">Photo • 1114x1348 • Science Lab</div>
+              </div>
+              <a href="assets/photo_lab_activity.jpg" download class="asset-download-btn" title="Download">
+                <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+              </a>
+            </div>
+
+            <div class="asset-item">
+              <img src="assets/photo_event_group.jpg" class="asset-thumb" alt="Student Group Event">
+              <div class="asset-details">
+                <div class="asset-name">photo_event_group.jpg</div>
+                <div class="asset-meta">Photo • 1798x1214 • Group</div>
+              </div>
+              <a href="assets/photo_event_group.jpg" download class="asset-download-btn" title="Download">
+                <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+              </a>
+            </div>
+
+            <div class="asset-item">
+              <img src="assets/qr_website.png" class="asset-thumb" alt="Website QR Code">
+              <div class="asset-details">
+                <div class="asset-name">qr_website.png</div>
+                <div class="asset-meta">QR Code • 300x300 • High Contrast</div>
+              </div>
+              <a href="assets/qr_website.png" download class="asset-download-btn" title="Download">
+                <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3: CANVA SPECS (Layout guidelines & prompts) -->
+        <section class="tab-pane" id="paneSpecs">
+          <h2 class="panel-section-title">Canva Layout Specs</h2>
+          <p class="panel-intro">Set up your Canva canvas with these grid rules for a perfect A0 visual flow.</p>
+
+          <ul class="spec-list">
+            <li><strong>Page Dimensions:</strong> Choose A0 Portrait (84.1 x 118.9 cm) or custom dimensions of <strong>2384 x 3370 pt</strong>.</li>
+            <li><strong>Margins:</strong> Set document margins to <strong>5% of width</strong> (approx. 120 pt in Canva). Keep all structural text within this zone.</li>
+            <li><strong>Font Sizes in Canva:</strong>
+              <ul>
+                <li>Main Slogan Header: <strong>80pt to 90pt</strong></li>
+                <li>University / Sub-headers: <strong>36pt to 44pt</strong></li>
+                <li>Section Titles: <strong>24pt to 28pt</strong></li>
+                <li>Body Copy: <strong>16pt to 18pt</strong></li>
+                <li>Subtext / Footers: <strong>12pt to 14pt</strong></li>
+              </ul>
+            </li>
+            <li><strong>Suggested Font Parings in Canva:</strong>
+              <ul>
+                <li><strong>Option A (Modern Tech):</strong> Space Grotesk (Headers) + Plus Jakarta Sans (Body)</li>
+                <li><strong>Option B (Clean Academic):</strong> Outfit (Headers) + Inter (Body)</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h2 class="panel-section-title" style="margin-top: 24px;">AI Visual Prompt Generator</h2>
+          <p class="panel-intro">If you want to generate alternative custom backgrounds or illustrations in Canva's Magic Media generator, use these prompts:</p>
+
+          <div class="prompt-card">
+            <div class="prompt-title">Futuristic Science Tokyo Background</div>
+            <div class="prompt-text">Minimalistic dark tech background with glowing cyan and orange network connections, binary code matrices, clean grid overlays, soft radial light sources, vector style, high resolution --ar 1:1.414</div>
+          </div>
+
+          <div class="prompt-card">
+            <div class="prompt-title">High School Student Illustration</div>
+            <div class="prompt-text">A modern diverse group of global engineering students collaborating in an advanced robotics and electronics laboratory, whiteboard with formulas behind them, warm light, flat vectors, clean design --ar 16:9</div>
+          </div>
+        </section>
+
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Toast Copy Notification -->
+  <div class="toast-msg" id="toastMsg">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+    Text copied to clipboard! Ready to paste in Canva.
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
