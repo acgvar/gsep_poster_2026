@@ -338,6 +338,13 @@ header.app-header {
   text-transform: uppercase;
 }
 
+/* Fix for html2canvas rendering text-gradients (which it doesn't support) */
+.html2canvas-export .poster-slogan {
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  color: var(--poster-accent) !important;
+}
+
 .poster-tagline {
   font-size: 13.5px;
   font-weight: 500;
@@ -1187,13 +1194,25 @@ header.app-header {
   transform: translateX(-50%) translateY(0);
 }
 
-/* Print styles for A0 PDF export */
+/* Print styles for A0/A4 PDF export */
 @media print {
-  body {
-    background: white !important;
-    color: black !important;
-    overflow: visible !important;
-    height: auto !important;
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  @page {
+    size: portrait;
+    margin: 0;
+  }
+  
+  html, body {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: transparent !important;
   }
   
   .app-header, 
@@ -1204,41 +1223,38 @@ header.app-header {
     display: none !important;
   }
   
-  .app-container {
-    display: block !important;
-    overflow: visible !important;
-  }
-  
-  .preview-pane {
-    padding: 0 !important;
-    background: transparent !important;
-    overflow: visible !important;
-    display: block !important;
-  }
-  
+  .app-container,
+  .preview-pane,
   .poster-viewport {
-    width: 841px !important;
-    height: 1189px !important;
-    transform: none !important;
+    width: 100% !important;
+    height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    page-break-inside: avoid;
+    overflow: hidden !important;
+    display: block !important;
+    background: transparent !important;
+    border: none !important;
   }
   
   .poster-draft {
-    position: relative !important;
-    transform: none !important;
-    box-shadow: none !important;
-    border: none !important;
     width: 841px !important;
     height: 1189px !important;
+    position: absolute !important;
     top: 0 !important;
     left: 0 !important;
-    page-break-after: always;
+    /* Scale the poster to fill the printable area dynamically */
+    transform: scale(calc(100vw / 841)) !important;
+    transform-origin: top left !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    page-break-inside: avoid;
   }
-  
-  @page {
-    size: 841mm 1189mm; /* A0 size */
-    margin: 0;
+
+  /* Fix for PDF rendering of text-gradient in print */
+  .poster-slogan {
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    color: var(--poster-accent) !important;
   }
 }

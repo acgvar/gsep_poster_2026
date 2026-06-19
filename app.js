@@ -245,6 +245,9 @@ function triggerHtml2Canvas() {
   draft.style.top = "0";
   draft.style.left = "0";
   
+  // Add class to fix text gradients/rendering issues in html2canvas
+  draft.classList.add("html2canvas-export");
+  
   // Trigger html2canvas with scale multiplier of 2 for high quality print resolution
   html2canvas(draft, {
     scale: 2,
@@ -257,6 +260,9 @@ function triggerHtml2Canvas() {
     draft.style.position = originalPosition;
     draft.style.top = originalTop;
     draft.style.left = originalLeft;
+    
+    // Remove temporary class
+    draft.classList.remove("html2canvas-export");
     
     try {
       // Download logic
@@ -287,6 +293,9 @@ function triggerHtml2Canvas() {
     draft.style.position = originalPosition;
     draft.style.top = originalTop;
     draft.style.left = originalLeft;
+    
+    // Remove temporary class
+    draft.classList.remove("html2canvas-export");
     
     console.error("html2canvas error:", err);
     const toast = document.getElementById("toastMsg");
